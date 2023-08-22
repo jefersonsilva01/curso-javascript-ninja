@@ -12,7 +12,7 @@ function soma(arg1, arg2) {
 var result = soma(5, 10) + 5;
 
 // Qual o valor atualizado dessa variável?
-?
+20
 
 // Declare uma nova variável, sem valor.
 ?
