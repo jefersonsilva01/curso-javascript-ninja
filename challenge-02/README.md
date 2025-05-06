@@ -22,16 +22,16 @@ Crie uma função que adicione um valor à variável criada acima, e retorne a s
     O valor da variável agora é VALOR.
 Onde VALOR é o novo valor da variável.
 */
-function addValor(arg) {
-  newVar += arg;
+function addValor() {
+  newVar = 10;
   return "O valor da variável agora é " + newVar;
 }
 
 // Invoque a função criada acima.
-addValor(5);
+addValor();
 
 // Qual o retorno da função? (Use comentários de bloco).
-/* O valor da variável agora é 5 */
+/* O valor da variável agora é 10 */
 
 /*
 Crie uma função com as seguintes características:
