@@ -7,11 +7,13 @@ um único parâmetro como argumento. Essa função deve retornar `true` se o
 equivalente booleano para o valor passado no argumento for `true`, ou `false`
 para o contrário.
 */
-var isTruthy = arg => (arg || !arg) && true;
+var isTruthy = arg => !!arg;
 
 // Invoque a função criada acima, passando todos os tipos de valores `falsy`.
 isTruthy();
+isTruthy('');
 isTruthy(0);
+isTruthy(-0);
 isTruthy(NaN);
 isTruthy(null);
 isTruthy(false);
@@ -20,7 +22,16 @@ isTruthy(undefined);
 /*
 Invoque a função criada acima passando como parâmetro 10 valores `truthy`.
 */
-isTruthy(1, 5, 10, 'a', 'abc', 'abcde', true, !false, 1 + 2, ((1 + 2) * 3))
+isTruthy(1);
+isTruthy('a');
+isTruthy([]);
+isTruthy({});
+isTruthy(function(){});
+isTruthy("abc");
+isTruthy(20 * 30);
+isTruthy(10 + 10);
+isTruthy([1, 2, 3]);
+isTruthy({a: 1,  b: 2});
 
 /*
 Declare uma variável chamada `carro`, atribuindo à ela um objeto com as
@@ -80,10 +91,7 @@ Crie um método chamado `obterMarcaModelo`, que retorne:
 Para retornar os valores de marca e modelo, utilize os métodos criados.
 */
 carro.obterMarcaModelo = function() {
-  var marca = carro.obterMarca();
-  var modelo = carro.obterMModelo();
-
-  return "Esse carro é um " + marca + " " + modelo;
+  return "Esse carro é um " + carro.obterMarca() + " " + carro.obterMModelo();
 }
 
 /*
