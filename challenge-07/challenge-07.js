@@ -81,7 +81,7 @@ for (let even = 100; even <= 120; even++) {
 
 console.log('Números ímpares entre 111 e 125:');
 
-for (let odd = 100; odd <= 120; odd++) {
+for (let odd = 111; odd <= 125; odd++) {
   if (odd % 2 !== 0) {
     console.log(odd);
   }
