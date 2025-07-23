@@ -14,9 +14,7 @@ function returnArray(arr) {
 /*
 Imprima o segundo índice do array retornado pela função criada acima.
 */
-function returnArray(arr) {
-  return arr[1];
-}
+returnArray(newVar)[1];
 
 /*
 Crie uma função que receba dois parâmetros: o primeiro, um array de valores; e o
@@ -31,15 +29,13 @@ function indexArray(arr, index) {
 /*
 Declare uma variável que recebe um array com 5 valores, de tipos diferentes.
 */
-function fiveArray(arr) {
-  return arr;
-}
+var newArray = [1, 'a', {}, [], true];
 
 /*
 Invoque a função criada acima, fazendo-a retornar todos os valores do último
 array criado.
 */
-fiveArray(newVar);
+returnArray(newArray)
 
 /*
 Crie uma função chamada `book`, que recebe um parâmetro, que será o nome do
@@ -57,19 +53,19 @@ os livros.
 */
 function book(bookName) {
   var books = {
-    book1: {
+    'book1': {
       quantidadePagina: '10',
       autor: 'A',
       editora: 'A',
     },
 
-    book2: {
+    'book2': {
       quantidadePagina: '2',
       autor: 'B',
       editora: 'B',
     },
 
-    book3: {
+    'book3': {
       quantidadePagina: '15',
       autor: 'C',
       editora: 'C',
