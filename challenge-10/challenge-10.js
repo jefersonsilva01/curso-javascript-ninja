@@ -13,7 +13,7 @@ e faça a indentação correta.
   var five = Number('5');
   console.log(five + ' é número?', typeof five === 'number');
 
-  var concat = String(10) + String(10);
+  var concat = 10 + String(10);
   console.log('"' + concat + '" é uma string? E é igual a "1010"?', typeof concat === 'string');
 
   /*
@@ -58,9 +58,7 @@ e faça a indentação correta.
   - O desafio é fazer o retorno sem usar "if" ou "switch".
   */
   function isOperatorValid(operator) {
-    var operators = ['+', '-', '*', '/', '%'];
-
-    return operators.includes(operator);
+    return !!operation[operator]
   }
 
   /*
@@ -77,9 +75,7 @@ e faça a indentação correta.
   */
 
   function calculator(operator) {
-    var operators = ['+', '-', '*', '/', '%'];
-
-    if (!operators.includes(operator)) return false;
+    if (!isOperatorValid(operator)) return false;
 
     return function (param1, param2) {
       if (typeof param1 !== "number" || typeof param2 !== 'number') return false;
@@ -139,10 +135,16 @@ e faça a indentação correta.
   - Se "sum" for "false", mostrar no console a mensagem de erro.
   */
 
-  if (!sum) return console.log(showErrorMessage(operationSignal))
-  number1 = 1, number2 = 2;
+  if (sum) {
+    number1 = 1, number2 = 2;
 
-  console.log(showOperationMessage(operationSignal, number1, number2), sum(number1, number2));
+    console.log(showOperationMessage(operationSignal, number1, number2), sum(number1, number2));
+  }
+  else {
+    console.log(showErrorMessage(operationSignal))
+  }
+
+
 
   /*
   Repita desde o "PASSO 2" com as operações de subtração, multiplicação,
@@ -152,14 +154,50 @@ e faça a indentação correta.
   operationSignal = '-';
   var sub = calculator(operationSignal);
 
+  if (sub) {
+    number1 = 1, number2 = 2;
+
+    console.log(showOperationMessage(operationSignal, number1, number2), sub(number1, number2));
+  }
+  else {
+    console.log(showErrorMessage(operationSignal))
+  }
+
   operationSignal = '*';
   var mult = calculator(operationSignal);
+
+  if (mult) {
+    number1 = 1, number2 = 2;
+
+    console.log(showOperationMessage(operationSignal, number1, number2), mult(number1, number2));
+  }
+  else {
+    console.log(showErrorMessage(operationSignal))
+  }
 
   operationSignal = '/';
   var div = calculator(operationSignal);
 
+  if (div) {
+    number1 = 1, number2 = 2;
+
+    console.log(showOperationMessage(operationSignal, number1, number2), div(number1, number2));
+  }
+  else {
+    console.log(showErrorMessage(operationSignal))
+  }
+
   operationSignal = '%';
   var rest = calculator(operationSignal);
+
+  if (rest) {
+    number1 = 1, number2 = 2;
+
+    console.log(showOperationMessage(operationSignal, number1, number2), rest(number1, number2));
+  }
+  else {
+    console.log(showErrorMessage(operationSignal))
+  }
 
   /*
   Repita o PASSO 2 novamente, mas passando um operador inválido, para ver se
@@ -169,5 +207,12 @@ e faça a indentação correta.
   operationSignal = 'z';
   var error = calculator(operationSignal);
 
-  if (!error) return console.log(showErrorMessage(operationSignal))
+  if (error) {
+    number1 = 1, number2 = 2;
+
+    console.log(showOperationMessage(operationSignal, number1, number2), error(number1, number2));
+  }
+  else {
+    console.log(showErrorMessage(operationSignal))
+  }
 })
