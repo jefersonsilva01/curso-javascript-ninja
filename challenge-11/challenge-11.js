@@ -54,10 +54,10 @@
   'The person has more than 25 years old? [TRUE/FALSE]'
   */
   function moreThan(age) {
-    return 'The person has more than ' + age + ' year old? ' + String(person.age > age).toUpperCase();
+    return String(person.age > age).toUpperCase();
   }
 
-  console.log(moreThan(25))
+  console.log('The person has more than 25 year old? ' + moreThan(25))
 
   /*
   Faça um loop de 0 a 20, que adicione cada número como um item de um
@@ -68,7 +68,8 @@
 
   var numbers = [];
 
-  for (var i = 0; i <= 10; i++) {
+  for (var i = 0; i <= 20; i++) {
+    if (i > 10) break;
     numbers[i] = i;
   }
 
