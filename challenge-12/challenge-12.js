@@ -18,19 +18,14 @@ Envolva todo o conteúdo desse arquivo em uma IIFE.
     age: 8
   }
 
-  console.log('Propriedades de "person": ', person);
+  console.log('Propriedades de "person": ', Object.keys(person));
 
   /*
   Mostre no console, em um array, todas as propriedades do objeto acima.
   Não use nenhuma estrutura de repetição, nem crie o array manualmente.
   */
-  let personArr = [];
 
-  for (prop in person) {
-    personArr.push(prop)
-  }
-
-  console.log(personArr)
+  console.log(Object.keys(person))
 
   /*
   Crie um array vazio chamado `books`.
@@ -84,26 +79,29 @@ Envolva todo o conteúdo desse arquivo em uma IIFE.
   /*
   Converta os objetos que ficaram em `books` para strings.
   */
-
+  JSON.stringify(books)
 
   /*
   Mostre os livros nesse formato no console:
   */
 
-  console.log('\nLivros em formato string:');
+  books = JSON.stringify(books);
+  console.log('\nLivros em formato string:', books);
 
   /*
   Converta os livros novamente para objeto.
   */
 
-  console.log('\nAgora os livros são objetos novamente:');
+  books = JSON.parse(books)
+
+  console.log('\nAgora os livros são objetos novamente:', books);
 
   /*
   Mostre no console todas as propriedades e valores de todos os livros,
   no formato abaixo:
       "[PROPRIEDADE]: [VALOR]"
   */
-  for (let i = 0; i < books.length; i++) {
+  for (var i = 0; i < books.length; i++) {
     for (prop in books[i]) {
       console.log(prop + ': ' + books[i][prop])
     }
