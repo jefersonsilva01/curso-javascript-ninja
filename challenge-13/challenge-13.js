@@ -41,10 +41,7 @@ Envolva todo o código desse desafio em uma IIFE.
   Remova o primeiro estado do array `brasil` e mostre-o no console.
   */
 
-  brasil.shift()
-
-  console.log('\nEstado removido:', brasil);
-
+  console.log('\nEstado removido:', brasil.shift());
 
   /*
   Crie um novo array chamado `newSul`, que receba somente os estados do sul,
@@ -126,18 +123,17 @@ Envolva todo o código desse desafio em uma IIFE.
   Senão, mostre no console:
   - "Nem todos os estados tem mais de 7 letras!"
   */
-  var result;
-
-  brasil.every(function (item) {
-    return result = item.length > 7 ? true : false;
+  var result = brasil.every(function (item) {
+    return item.length > 7;
   })
-
 
   console.log('\nTodos os estados de `brasil` tem mais de 7 letras?');
 
-  result
-    ? console.log("Sim, todos os estados tem mais de 7 letras!")
-    : console.log("Nem todos os estados tem mais de 7 letras!")
+  console.log(
+    result
+      ? "Sim, todos os estados tem mais de 7 letras!"
+      : "Nem todos os estados tem mais de 7 letras!"
+  )
 
 
   /*
@@ -149,17 +145,17 @@ Envolva todo o código desse desafio em uma IIFE.
   - "Ceará não foi incluído :("
   */
 
-  var result;
-
-  brasil.some(function (item) {
-    return result = item === 'Ceará' ? true : false;
+  var result = brasil.some(function (item) {
+    return item === 'Ceará';
   })
 
   console.log('\nCeará está incluído em `brasil`?');
 
-  result
-    ? console.log("Ceará está incluído!")
-    : console.log("Ceará não foi incluído :(");
+  console.log(
+    result
+      ? "Ceará está incluído!"
+      : "Ceará não foi incluído :("
+  );
 
 
   /*
@@ -170,10 +166,10 @@ Envolva todo o código desse desafio em uma IIFE.
   */
 
   var map = newBrasil.map(function (item) {
-    return {
-      id: item.id + 1,
-      estado: item.estado + ' pertence ao Brasil.'
-    }
+    item.id++;
+    item.estado += ' pertence ao Brasil.'
+
+    return item;
   })
 
   /*
@@ -187,7 +183,7 @@ Envolva todo o código desse desafio em uma IIFE.
   ID par. Atribua o valor à uma variável chamada `filter`.
   */
   var filter = map.filter(function (item) {
-    if (item.id % 2 === 0) return item;
+    return item.id % 2 === 0;
   });
 
   /*
