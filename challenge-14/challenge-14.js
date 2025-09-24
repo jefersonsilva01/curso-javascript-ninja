@@ -12,18 +12,11 @@ Envolva todo o código desse desafio em uma IIFE.
   Mostre esse array no console.
   */
 
-  var numberObjects = [
-    { number: 1 },
-    { number: 2 },
-    { number: 3 },
-    { number: 4 },
-    { number: 5 },
-    { number: 6 },
-    { number: 7 },
-    { number: 8 },
-    { number: 9 },
-    { number: 10 }
-  ];
+  var numberObjects = [];
+
+  for (var i = 1; i <= 10; i++) {
+    numberObjects.push({ number: i })
+  }
 
   console.log('Number Objects Array:', numberObjects);
 
@@ -63,7 +56,7 @@ Envolva todo o código desse desafio em uma IIFE.
 
   var operation = justMod2Or3.reduce(function (acc, next) {
     return (acc + 1) * next;
-  })
+  }, 0)
 
   console.log('\nOperation:', operation);
 
@@ -76,10 +69,9 @@ Envolva todo o código desse desafio em uma IIFE.
 
   var operation2 = justMod2Or3.reduceRight(function (acc, next) {
     return (acc + 1) * next;
-  })
+  }, 0)
 
   console.log('\nOperation 2:', operation2);
-
 
   /*
   Crie um array chamado `name`. Cada elemento desse array deve ser uma sílaba
@@ -92,9 +84,9 @@ Envolva todo o código desse desafio em uma IIFE.
 
   var name = ['je', 'fer', 'son'];
 
-  var Pname = 'P' + name.reduce(function (acc, next) {
+  var Pname = name.reduce(function (acc, next) {
     return acc + 'P' + next;
-  },)
+  }, '')
 
   console.log('\nSeu nome na língua do "P":', Pname);
 
@@ -105,8 +97,8 @@ Envolva todo o código desse desafio em uma IIFE.
   */
 
 
-  var inversedName = name.join('').split('').reduceRight(function (acc, next) {
-    return acc + next
+  var inversedName = name.reduceRight(function (acc, next) {
+    return acc + next;
   });
 
   console.log('\nInversed Name:', inversedName);
@@ -127,7 +119,7 @@ Envolva todo o código desse desafio em uma IIFE.
   o que acontece ;)
   */
 
-  var result = numberObjects.indexOf({ number: 2 })
+  var result = numberObjects.indexOf({ number: 2 }) > -1
 
   console.log('\nExiste um { number: 2 } em numberObjects?');
 
@@ -142,7 +134,7 @@ Envolva todo o código desse desafio em uma IIFE.
   será que obtemos um resultado diferente? Faça a busca a partir do índice 2.
   */
 
-  var result = numberObjects.lastIndexOf({ number: 2 },)
+  var result = numberObjects.lastIndexOf({ number: 2 }, 2) > -1
 
   console.log('\nE buscando a partir do último índice, o { number: 2 } existe?');
 
@@ -158,6 +150,8 @@ Envolva todo o código desse desafio em uma IIFE.
   */
   console.log('\njustMod2Or3 é um array? Se for, a representação dele em String é:');
 
-  console.log(Array.isArray(justMod2Or3))
+  if (Array.isArray(justMod2Or3)) {
+    console.log(justMod2Or3.toString())
+  }
 
 })();
