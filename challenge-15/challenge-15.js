@@ -39,7 +39,7 @@ Crie um arquivo chamado index.html e adicione esse script ao HTML.
     this.addAge = function () {
       this.age += arguments[0]
 
-      return this.age
+      return this;
     }
   }
 
@@ -85,8 +85,8 @@ Crie um arquivo chamado index.html e adicione esse script ao HTML.
   */
   console.log('\nNova idade das pessoas:');
 
-  console.log(fred.getFullName() + ' tem ' + fred.addAge(2) + ' anos.');
-  console.log(bob.getFullName() + ' tem ' + bob.addAge(2) + ' anos.');
-  console.log(bela.getFullName() + ' tem ' + bela.addAge(2) + ' anos.');
+  console.log(fred.getFullName() + ' agora tem ' + fred.addAge(2).getAge() + ' anos.');
+  console.log(bob.getFullName() + ' agora tem ' + bob.addAge(2).getAge() + ' anos.');
+  console.log(bela.getFullName() + ' agora tem ' + bela.addAge(2).getAge() + ' anos.');
 
 })();
