@@ -40,12 +40,12 @@
 
   var fullName = "jeferson-dos-santos-silva";
 
-  var slugName = fullName.split("-").map(function (item) {
+  var newName = fullName.split("-").map(function (item) {
     return item.charAt(0).toUpperCase() + item.slice(1)
   }).join(" ");
 
   console.log(fullName)
-  console.log(slugName)
+  console.log(newName)
 
 
   /*
@@ -61,21 +61,12 @@
 
   var names = ["Bob", "Fred", "Simba", "Jef", "Bella"];
 
-  var newNames = names.map(function (item, index) {
-    if (index !== names.length - 1) {
-      return item + ",";
-    }
-
-    else if (index === names.length - 2) {
-      return item + " e ";
-    }
-
-    else {
-      return item;
-    }
+  var newNames = names.reduce(function (acc, next, index) {
+    var separator = names.length - 1 === index ? ' e ' : ', ';
+    return acc + separator + next;
   })
 
-  console.log(newNames.join(' ') + " são meus amigos.");
+  console.log(newNames + " são meus amigos.");
 
   /*
   Usando o replace(), faça a string "Roberto" virar "Roberta".
@@ -87,9 +78,7 @@
   Mostre no console a parte "nando" da string "Fernando". Use o método que
   faz a busca do final para o início da string.
   */
-  console.log('\nParte de uma string:' + " " + "Fernando".substring(8, 3));
-
-
+  console.log('\nParte de uma string:' + " " + "Fernando".substring("Fernando".length, 3));
 
   /*
   Declare uma variável chamada `myName`, que receba o seu primeiro nome,
@@ -104,15 +93,9 @@
 
   var myName = "Jeferson"
 
-  var newName = myName
-    .toLowerCase()
-    .split("")
-    .map(function (item, index) {
-      return index % 2 === 0
-        ? item.toUpperCase()
-        : item;
-    })
-    .join("");
+  var newName = myName.split("").map(function (item, index) {
+    return index % 2 === 0 ? item.toUpperCase() : item;
+  }).join("");
 
   console.log(newName);
 })();
