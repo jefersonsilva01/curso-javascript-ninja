@@ -4,6 +4,7 @@
 3. Crie um arquivo index.html e adicione esse script à ele.
 */
 (function () {
+  'use strict'
 
   /*
   Crie uma função chamada `cleanCPF`, que receba um CPF por parâmetro, e
@@ -21,10 +22,16 @@
     return CPF.replace(/\D/g, '')
   }
 
-  console.log(cleanCPF("049-214 3421-1"))
-  console.log(cleanCPF("210.458.522-05"))
-  console.log(cleanCPF("735 500 794 - 22"))
-  console.log(cleanCPF("101.123-131x32"))
+  var cpfArray = [
+    "049-214 3421-1",
+    "210.458.522-05",
+    "735 500 794 - 22",
+    "101.123-131x32"
+  ]
+
+  cpfArray.forEach(function (cpf) {
+    console.log(cleanCPF(cpf))
+  })
 
   /*
   Usando os CPFs limpos acima, deixe-os com a formatação correta de CPF.
@@ -33,21 +40,14 @@
   */
   console.log('\nFormatando CPFs corretamente:');
 
-  console.log(cleanCPF("101.123-131x32")
-    .replace(/(\d{3})(?=\d{3})/g, '$1.')
-    .replace(/(\d{2})$/, '-$1'));
-
-  console.log(cleanCPF("210.458.522-05")
-    .replace(/(\d{3})(?=\d{3})/g, '$1.')
-    .replace(/(\d{2})$/, '-$1'));
-
-  console.log(cleanCPF("735 500 794 - 22")
-    .replace(/(\d{3})(?=\d{3})/g, '$1.')
-    .replace(/(\d{2})$/, '-$1'));
-
-  console.log(cleanCPF("101.123-131x32")
-    .replace(/(\d{3})(?=\d{3})/g, '$1.')
-    .replace(/(\d{2})$/, '-$1'));
+  cpfArray.forEach(function (cpf) {
+    console.log(
+      cleanCPF(cpf)
+        // .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '$1.$2.$3-$4')
+        .replace(/(\d{3})(?=\d{3})/g, '$1.')
+        .replace(/(\d{2})$/, '-$1')
+    )
+  })
 
   /*
   Crie uma expressão regular que faça match com as palavras "junho" ou "julho",
@@ -63,7 +63,8 @@
   console.log('\nMatch com as palavras "junho" ou "julho" para a frase "Os meses de janeiro, junho e julho começam com a letra j.":');
 
   var text = "Os meses de janeiro, junho e julho começam com a letra j.";
-  var regex = /(\ju\w+)/g;
+  // var regex = /(\ju\w+)/g;
+  var regex = /(\ju[nl]\ho)/g;
 
   console.log(text.match(regex))
 
@@ -79,7 +80,7 @@
   console.log('\nMatch com a abertura de uma tag HTML:');
 
   var mark = "<div><section><blockquote>Texto <img /></blockquote></section></div>";
-  var regex = /\<\w+\>/g;
+  var regex = /\<\w+>/g;
 
   console.log(mark.match(regex));
 
@@ -95,7 +96,7 @@
   console.log('\nMatch com tags HTML vazias (abertura e fechamento da tag):');
 
   var mark = "<div><ul><li></li><li></li><li><span></span></li></ul></div>"
-  var regex = /\<\w+\>\<\/\w+\>/g
+  var regex = /\<\w+>\<\/\w+>/g
 
   console.log(mark.match(regex))
 
@@ -129,7 +130,10 @@
   console.log(mark.replace(regex, function (regex, openTag, text, closeTag) {
     return openTag + "O texto dentro da tag "
       + openTag.replace(/[\<\>]/g, '"')
-      + " é " + text + closeTag + "\n";
-  }))
+      + " é " + "'" + text + "'" + closeTag + "\n";
+  }));
+
+  // var regex = /(\<(\w+)>)([^<]+)(<\/\w+>)/g;
+  // console.log(mark.replace(regex, "$1O texto dentro da tag '$2' é '$3'$4\n"));
 
 })();
