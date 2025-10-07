@@ -8,100 +8,149 @@ a marcação criada nele para fazer nosso desafio ;)
 O HTML NÃO PODE ser alterado!
 */
 
-/*
-Ao carregar a página, pergunte ao usuário "Qual o seu nome?". Atribua o
-resultado à uma variável chamada `username`. Se o usuário não digitar um
-nome, `username` deve receber "Desconhecido".
-Com a resposta, mostre um alert com a mensagem "Bem vindo [USERNAME]!"
-*/
-// ?
+(function (win, doc) {
+  'use strict'
 
-/*
-Agora, pergunte ao usuário "Qual o seu e-mail?", atribuindo o resultado à
-uma variável chamada `email`.
-*/
-// ?
+  /*
+  Ao carregar a página, pergunte ao usuário "Qual o seu nome?". Atribua o
+  resultado à uma variável chamada `username`. Se o usuário não digitar um
+  nome, `username` deve receber "Desconhecido".
+  Com a resposta, mostre um alert com a mensagem "Bem vindo [USERNAME]!"
+  */
+  var username = win.prompt("Qual o seu nome?") || "Desconhecido"
 
-/*
-- Selecione o input de "Nome", atribuindo-o à uma variável chamada
-`$inputUsername`.
-*/
-// ?
+  win.alert("Bem vindo " + username + "!");
 
-/*
-- Selecione o input de "Email", atribuindo-o à uma variável chamada
-`$inputEmail`.
-*/
-// ?
+  /*
+  Agora, pergunte ao usuário "Qual o seu e-mail?", atribuindo o resultado à
+  uma variável chamada `email`.
+  */
 
-/*
-- Selecione o campo de "Mensagem", atribuindo-o à uma variável chamada
-`$message`.
-*/
-// ?
+  var email = win.prompt("Qual seu e-mail?");
 
-/*
-- Selecione o botão de envio do formulário, atribuindo-o à uma variável
-chamada `$button`.
-*/
-// ?
+  /*
+  - Selecione o input de "Nome", atribuindo-o à uma variável chamada
+  `$inputUsername`.
+  */
 
-/*
-Preencha os campos de "Nome" e "Email" que estão no documento com os valores
-entrados pelo usuário.
-*/
-// ?
+  var $inputUsername = doc.querySelector("input[type=text]");
 
-/*
-Adicione um listener de evento de click ao botão que faça o seguinte:
-1. Verificar se todos os campos estão preenchidos:
-- Mostrar um alert para cada campo não preenchido, como abaixo:
-- Se o campo de "Nome" não estiver preenchido, mostrar:
-    - "Preencha o nome do usuário!"
-- Se o campo de "Email" não estiver preenchido, mostrar:
-    - "Preencha o e-mail!"
-- Se o campo de "Mensagem" não estiver preenchido, mostrar:
-    - "Preencha a mensagem!"
-- Se o campo de "Email" for inválido, mostrar:
-    - "Entre com um e-mail válido!"
+  /*
+  - Selecione o input de "Email", atribuindo-o à uma variável chamada
+  `$inputEmail`.
+  */
 
-2. Para verificar se o e-mail é válido use a função `isValidEmail`, passando
-o e-mail que foi entrado no campo de "Email" por parâmetro. (A função
-`isValidEmail` será criada logo abaixo).
+  var $inputEmail = doc.querySelector("input[type=email]");
 
-3. Se tudo estiver OK, pergunte ao usuário:
-    - "Tem certeza que deseja enviar o formulário?"
-Se for confirmado, mostre um alerta com a mensagem:
-    - "Enviado com sucesso!"
-Caso contrário, mostre um alerta com a mensagem:
-    - "Não enviado."
-*/
-// ?
+  /*
+  - Selecione o campo de "Mensagem", atribuindo-o à uma variável chamada
+  `$message`.
+  */
 
-/*
-Crie uma função chamada `isValidEmail`, que será usada na validação do
-envio do formulário.
-Essa função deve receber o e-mail por parâmetro e verificar se é um e-mail
-válido.
-As regras para validação são:
-    - O nome do usuário (antes do arroba), pode ser qualquer caractere
-    alfanumérico, incluindo o underscore, sinal de "+" e o ponto;
-    - Após o arroba, o domínio pode conter somente caracteres alfanuméricos
-    e o underscore;
-    - Para a extensão, o domínio deve vir seguido de um ponto, e no mínimo
-    2 caracteres alfanuméricos;
-    - O final do domínio é opcional, mas se existir, deve começar com um
-    ponto, seguido de no máximo 2 caracteres alfanuméricos.
+  var $message = doc.querySelector("textarea");
 
-Alguns e-mails válidos que podem ser usados para testar:
-    - "meu.email+categoria@gmail.com"
-    - "juca_malandro@bol.com.br"
-    - "pedrobala@hotmail.uy"
-    - "sandro@culinaria.dahora"
+  /*
+  - Selecione o botão de envio do formulário, atribuindo-o à uma variável
+  chamada `$button`.
+  */
 
-Alguns e-mails inválidos:
-    - "walter-da-silva@maraca.br"
-    - "rita-marica@titica.a.b"
-    - "agua_@evida.br.com"
-*/
-// ?
+  var $button = doc.querySelector("button");
+
+
+  /*
+  Preencha os campos de "Nome" e "Email" que estão no documento com os valores
+  entrados pelo usuário.
+  */
+
+  $inputUsername.value = username;
+  $inputEmail.value = email;
+
+  /*
+  Adicione um listener de evento de click ao botão que faça o seguinte:
+  1. Verificar se todos os campos estão preenchidos:
+  - Mostrar um alert para cada campo não preenchido, como abaixo:
+  - Se o campo de "Nome" não estiver preenchido, mostrar:
+      - "Preencha o nome do usuário!"
+  - Se o campo de "Email" não estiver preenchido, mostrar:
+      - "Preencha o e-mail!"
+  - Se o campo de "Mensagem" não estiver preenchido, mostrar:
+      - "Preencha a mensagem!"
+  - Se o campo de "Email" for inválido, mostrar:
+      - "Entre com um e-mail válido!"
+
+  2. Para verificar se o e-mail é válido use a função `isValidEmail`, passando
+  o e-mail que foi entrado no campo de "Email" por parâmetro. (A função
+  `isValidEmail` será criada logo abaixo).
+
+  3. Se tudo estiver OK, pergunte ao usuário:
+      - "Tem certeza que deseja enviar o formulário?"
+  Se for confirmado, mostre um alerta com a mensagem:
+      - "Enviado com sucesso!"
+  Caso contrário, mostre um alerta com a mensagem:
+      - "Não enviado."
+  */
+
+
+  function checkFields(formFields) {
+    for (var field in formFields) {
+      if (!formFields[field])
+        return alert("Preencha " + field + "!");
+    }
+
+    if (!isValidEmail(formFields['o e-mail']))
+      return alert("Entre com um e-mail válido!");
+
+    var response = win.confirm("Tem certeza que deseja enviar o formulário?");
+
+    if (response) win.alert("Enviado com sucesso!");
+
+    else win.alert("Não enviado");
+  }
+
+  $button.addEventListener('click', function (event) {
+    event.preventDefault()
+
+    var formFields = {
+      'o nome do usuário': $inputUsername.value,
+      'o e-mail': $inputEmail.value,
+      'a mensagem': $message.value,
+    }
+
+    checkFields(formFields);
+  });
+
+
+  /*
+  Crie uma função chamada `isValidEmail`, que será usada na validação do
+  envio do formulário.
+  Essa função deve receber o e-mail por parâmetro e verificar se é um e-mail
+  válido.
+  As regras para validação são:
+      - O nome do usuário (antes do arroba), pode ser qualquer caractere
+      alfanumérico, incluindo o underscore, sinal de "+" e o ponto;
+      - Após o arroba, o domínio pode conter somente caracteres alfanuméricos
+      e o underscore;
+      - Para a extensão, o domínio deve vir seguido de um ponto, e no mínimo
+      2 caracteres alfanuméricos;
+      - O final do domínio é opcional, mas se existir, deve começar com um
+      ponto, seguido de no máximo 2 caracteres alfanuméricos.
+
+  Alguns e-mails válidos que podem ser usados para testar:
+      - "meu.email+categoria@gmail.com"
+      - "juca_malandro@bol.com.br"
+      - "pedrobala@hotmail.uy"
+      - "sandro@culinaria.dahora"
+
+  Alguns e-mails inválidos:
+      - "walter-da-silva@maraca.br"
+      - "rita-marica@titica.a.b"
+      - "agua_@evida.br.com"
+  */
+
+  function isValidEmail(email) {
+    var regex = /^[\w._+]+@[\w\_]+\.\w{2,}(?:\.\w{2})?$/gm
+
+    return email.match(regex);
+  }
+
+})(window, document);
