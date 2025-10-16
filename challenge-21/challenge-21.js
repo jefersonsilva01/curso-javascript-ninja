@@ -19,7 +19,7 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
   'use strict';
 
   var counter = doc.querySelector('[data-js="counter"]');
-  var buttons = doc.querySelectorAll('button[data-js');
+  var buttons = doc.querySelectorAll('button');
   var counterStatus;
 
   function start() {
@@ -38,8 +38,10 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     stop();
   }
 
-  buttons[0].addEventListener('click', start);
-  buttons[1].addEventListener('click', stop);
-  buttons[2].addEventListener('click', reset);
+  buttons.forEach(function (button) {
+    var fn = eval(button.dataset.js);
 
-})(window, document)
+    button.addEventListener('click', fn);
+  });
+
+})(window, document);
