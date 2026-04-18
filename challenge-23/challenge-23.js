@@ -23,3 +23,122 @@ multiplicação (x), então no input deve aparecer "1+2x".
 input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
+
+(function () {
+  "use strict";
+
+  const input = document.querySelector("input");
+
+  const buttons = document.querySelectorAll("button");
+
+  const symbols = { "+": "+", "-": "-", "*": "*", "/": "/" };
+
+  let numbersForCalc = [];
+
+  let lastNumber = "";
+  let lastSymbol = "";
+
+  function clear() {
+    input.value = "0";
+    numbersForCalc = [];
+    lastSymbol = "";
+    lastNumber = "";
+  }
+
+  function calcValue(numbersForCalc) {
+    let num1 = "", num2 = "", op = ""
+
+    function calc(num1, op, num2) {
+      switch (op){
+        case "+":
+          return num1 + num2;
+          break;
+
+        case "-":
+          return num1 - num2;
+          break;
+
+        case "*":
+          return num1 * num2;
+          break;
+
+        case "/":
+          return num1 / num2;
+          break;
+      }
+    }
+
+    numbersForCalc.forEach(function(item){
+
+      if (!symbols[item] && num1 === ""){
+        num1 = Number(item);
+      } else if (symbols[item]) {
+        op = item;
+      } else if (!symbols[item] && num1 !== "") {
+        num2 = Number(item);
+      }
+
+      if(op !== "" && num2 !== ""){
+        num1 = calc(num1, op, num2)
+      }
+
+      clear();
+      input.value = num1
+      lastNumber = num1;
+    })
+  }
+
+  function checkValue(value) {
+    if (value === "CE") return clear();
+    if (value === "=") {
+      numbersForCalc.push(lastNumber)
+      return calcValue(numbersForCalc);
+      ;
+    }
+
+    // Check if input equals 0 and input is 0 or symbol
+    if (input.value === "0" && !symbols[value] && value !== "0") {
+      input.value = value;
+      lastNumber += value;
+
+
+    } else if (input.value !== "0") {
+
+      // Checl if input is symbol and save number for calc
+      if(symbols[value] && lastSymbol === "") {
+        lastSymbol = value;
+        numbersForCalc.push(lastNumber);
+        lastNumber = ""
+        input.value += value;
+
+      // Check if input symbol change and update
+      } else if (symbols[value] && lastSymbol !== "") {
+        lastSymbol = value
+        input.value = input.value.slice(0, -1) + value;
+      }
+
+      // Check if input is number and store symbol for calc
+      if(!symbols[value] && lastSymbol !== "") {
+        numbersForCalc.push(lastSymbol)
+        lastSymbol = "";
+        lastNumber += value;
+        input.value += value;
+
+      // Only update number
+      } else if (!symbols[value]){
+        lastNumber += value;
+        input.value += value;
+      }
+    }
+  }
+
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const value = this.innerHTML;
+
+      checkValue(value);
+    });
+  });
+
+})();
