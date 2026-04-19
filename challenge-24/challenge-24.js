@@ -10,66 +10,62 @@ listeners de eventos, etc);
 mesma funcionalidade.
 */
 
-var $visor = document.querySelector('[data-js="visor"]');
-var $buttonsNumbers = document.querySelectorAll('[data-js="button-number"]');
-var $buttonsOperations = document.querySelectorAll('[data-js="button-operation"]');
-var $buttonCE = document.querySelector('[data-js="button-ce"]');
-var $buttonEqual = document.querySelector('[data-js="button-equal"]');
+let visor = document.querySelector('[data-js="visor"]');
+let buttons = document.querySelectorAll('button');
 
-Array.prototype.forEach.call($buttonsNumbers, function(button) {
-  button.addEventListener('click', handleClickNumber, false);
-});
-Array.prototype.forEach.call($buttonsOperations, function(button) {
-  button.addEventListener('click', handleClickOperation, false);
-});
-$buttonCE.addEventListener('click', handleClickCE, false);
-$buttonEqual.addEventListener('click', handleClickEqual, false);
+const operations = {'+': '+', '-': 'x', '÷': '÷', 'x': 'x'};
+const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-function handleClickNumber() {
-  $visor.value += this.value;
+const clear = () => visor.value = 0;
+
+const isLastItemAnOperation = () => operations[visor.value.split('').pop()];
+
+const removeLastItemIfItIsAnOperator = (value) => {
+  if(isLastItemAnOperation()) return value.slice(0, -1);
+
+  return value;
 }
+const valuesForCalc = () => visor.value.match(/\d+[+x÷-]?/g);
 
-function handleClickOperation() {
-  $visor.value = removeLastItemIfItIsAnOperator($visor.value);
-  $visor.value += this.value;
-}
-
-function handleClickCE() {
-  $visor.value = 0;
-}
-
-function isLastItemAnOperation(number) {
-  var operations = ['+', '-', 'x', '÷'];
-  var lastItem = number.split('').pop();
-  return operations.some(function(operator) {
-    return operator === lastItem;
-  });
-}
-
-function removeLastItemIfItIsAnOperator(number) {
-  if(isLastItemAnOperation(number)) {
-    return number.slice(0, -1);
+const calc = (firstValue, lastValue, operator, lastOperator) => {
+  const operationsCalc = {
+    '+': ( firstValue + lastValue ) + lastOperator,
+    '-': ( firstValue - lastValue ) + lastOperator,
+    'x': ( firstValue * lastValue ) + lastOperator,
+    '÷': ( firstValue / lastValue ) + lastOperator,
   }
-  return number;
+
+  return operationsCalc[operator];
 }
 
-function handleClickEqual() {
-  $visor.value = removeLastItemIfItIsAnOperator($visor.value);
-  var allValues = $visor.value.match(/\d+[+x÷-]?/g);
-  $visor.value = allValues.reduce(function(accumulated, actual) {
-    var firstValue = accumulated.slice(0, -1);
-    var operator = accumulated.split('').pop();
-    var lastValue = removeLastItemIfItIsAnOperator(actual);
-    var lastOperator = isLastItemAnOperation(actual) ? actual.split('').pop() : '';
-    switch(operator) {
-      case '+':
-        return ( Number(firstValue) + Number(lastValue) ) + lastOperator;
-      case '-':
-        return ( Number(firstValue) - Number(lastValue) ) + lastOperator;
-      case 'x':
-        return ( Number(firstValue) * Number(lastValue) ) + lastOperator;
-      case '÷':
-        return ( Number(firstValue) / Number(lastValue) ) + lastOperator;
-    }
+const handleCalc = () => {
+  visor.value = removeLastItemIfItIsAnOperator(visor.value);
+
+  let allValues = valuesForCalc();
+
+  visor.value = allValues.reduce((accumulated, actual) => {
+    let firstValue = Number(accumulated.slice(0, -1));
+    let operator = accumulated.split('').pop();
+    let lastValue = Number(removeLastItemIfItIsAnOperator(actual));
+    let lastOperator = isLastItemAnOperation(actual) ? actual.split('').pop() : '';
+
+    return calc(firstValue, lastValue, operator, lastOperator);
   });
 }
+
+const checkValue = value => {
+  if (value === "ce") return clear();
+
+  if (operations[value]) {
+    visor.value = removeLastItemIfItIsAnOperator(visor.value);
+    visor.value += value;
+    return;
+  }
+
+  if (numbers[value]) return visor.value += value;
+
+  if (value === "=") return handleCalc(visor.value);
+}
+
+buttons.forEach(button => button
+  .addEventListener('click', () => checkValue(button.value)));

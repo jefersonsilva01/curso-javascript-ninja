@@ -28,15 +28,12 @@ input;
   "use strict";
 
   const input = document.querySelector("input");
-
   const buttons = document.querySelectorAll("button");
 
   const symbols = { "+": "+", "-": "-", "*": "*", "/": "/" };
 
   let numbersForCalc = [];
-
-  let lastNumber = "";
-  let lastSymbol = "";
+  let lastNumber = ""; lastSymbol = "";
 
   function clear() {
     input.value = "0";
@@ -90,17 +87,16 @@ input;
 
   function checkValue(value) {
     if (value === "CE") return clear();
+
     if (value === "=") {
-      numbersForCalc.push(lastNumber)
+      numbersForCalc.push(lastNumber);
       return calcValue(numbersForCalc);
-      ;
     }
 
     // Check if input equals 0 and input is 0 or symbol
     if (input.value === "0" && !symbols[value] && value !== "0") {
       input.value = value;
       lastNumber += value;
-
 
     } else if (input.value !== "0") {
 
@@ -132,10 +128,9 @@ input;
     }
   }
 
-
-  buttons.forEach((button) => {
+  buttons.forEach( function(button) {
     button.addEventListener("click", function () {
-      const value = this.innerHTML;
+      const value = button.innerHTML;
 
       checkValue(value);
     });
